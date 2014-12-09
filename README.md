@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/karupanerura/Test-SharedObject.svg?branch=master)](https://travis-ci.org/karupanerura/Test-SharedObject) [![Coverage Status](https://img.shields.io/coveralls/karupanerura/Test-SharedObject/master.svg)](https://coveralls.io/r/karupanerura/Test-SharedObject?branch=master)
 # NAME
 
 Test::SharedObject - Data sharing in multi process.

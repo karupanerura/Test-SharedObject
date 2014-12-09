@@ -55,6 +55,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/karupanerura/Test-SharedObject/issues"
+      },
+      "homepage" : "https://github.com/karupanerura/Test-SharedObject",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/karupanerura/Test-SharedObject.git",
+         "web" : "https://github.com/karupanerura/Test-SharedObject"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:KARUPA"
 }

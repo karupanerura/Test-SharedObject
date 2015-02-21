@@ -149,8 +149,12 @@ Bad Example:
 
 =item $shared->set($value)
 
+Set C<$value> as shared value.
+The syntactic sugar for C<$shared-E<gt>txn()>.
+
 =item my $value = $shared->get()
 
+Get shared value.
 The syntactic sugar for C<$shared-E<gt>txn()>.
 
 =back

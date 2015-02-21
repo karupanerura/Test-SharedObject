@@ -10,7 +10,7 @@ is $shared->fetch, 0, 'should success to set 0.';
 
 for (1..50) {
     my $pid = fork;
-    die $! unless defined $pid;
+    die $! unless defined $pid; # uncoverable branch
     if ($pid == 0) {# child
         sleep 1;
         $shared->txn(sub { ++$_[0] });

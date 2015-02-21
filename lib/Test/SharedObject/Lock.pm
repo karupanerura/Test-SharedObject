@@ -6,7 +6,7 @@ use Fcntl qw/:flock/;
 
 sub new {
     my ($class, $shared) = @_;
-    open my $fh, '+<:raw', $shared->{file} or die "failed to open temporary file: $shared->{file}: $!";
+    open my $fh, '+<:raw', $shared->{file} or die "failed to open temporary file: $shared->{file}: $!"; # uncoverable branch
     flock $fh, LOCK_EX;
     return bless { fh => $fh } => $class;
 }

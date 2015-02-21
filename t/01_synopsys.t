@@ -13,7 +13,7 @@ $shared->store(2);
 is $shared->fetch, 2, 'should get stored value.';
 
 my $pid = fork;
-die $! unless defined $pid;
+die $! unless defined $pid; # uncoverable branch
 if ($pid == 0) {# child
     $shared->txn(sub { ++$_[0] });
     is $shared->fetch, 3, 'should get changed value in child process.';

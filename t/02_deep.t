@@ -21,7 +21,7 @@ is_deeply $shared->fetch, {
 }, 'should get changed value.';
 
 my $pid = fork;
-die $! unless defined $pid;
+die $! unless defined $pid; # uncoverable branch
 if ($pid == 0) {# child
     $shared->txn(sub {
         my $hash = shift;

@@ -94,7 +94,66 @@ Test::SharedObject - Data sharing in multi process.
 
 =head1 DESCRIPTION
 
-Test::SharedObject provides data sharing in multi process.
+Test::SharedObject provides atomic data operation between multiple process.
+
+=head1 METHODS
+
+=over
+
+=item my $shared = Test::SharedObject->new($value)
+
+Creates a new Test::SharedObject instance.
+And set C<$value> as initial value.
+
+Internally, Creates temporary file, and serialize C<$value> by L<Stroable>, and save.
+
+=item $shared->txn(\&coderef)
+
+Provides atomic data operation between multiple process in C<\&coderef>.
+Set shared value as first arguments in C<\&coderef>, and return value as new shared value.
+
+Internally:
+
+=over
+
+=item Lock temporary file.
+
+=item Read shared value.
+
+=item Executes C<\&coderef>. (Set shared value as first arguments)
+
+=item Write return value as shared value.
+
+=item Unlock temporary file.
+
+=back
+
+Good Example:
+
+    $shared->txn(sub {
+        my $counter = shift;
+        $counter++; # atomic!!
+        return $counter;
+    });
+
+Bad Example:
+
+    my $counter;
+    $shared->txn(sub {
+        $counter = shift;
+    });
+    $counter++; # *NOT* atomic!!
+    $shared->txn(sub {
+        return $counter;
+    });
+
+=item $shared->set($value)
+
+=item my $value = $shared->get()
+
+The syntactic sugar for C<$shared->txn()>.
+
+=back
 
 =head1 LICENSE
 

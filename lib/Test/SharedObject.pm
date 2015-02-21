@@ -105,7 +105,7 @@ Test::SharedObject provides atomic data operation between multiple process.
 Creates a new Test::SharedObject instance.
 And set C<$value> as initial value.
 
-Internally, Creates temporary file, and serialize C<$value> by L<Stroable>, and save.
+Internally, Creates temporary file, and serialize C<$value> by L<Storable>, and save.
 
 =item $shared->txn(\&coderef)
 

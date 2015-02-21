@@ -151,7 +151,7 @@ Bad Example:
 
 =item my $value = $shared->get()
 
-The syntactic sugar for C<$shared->txn()>.
+The syntactic sugar for C<$shared-E<gt>txn()>.
 
 =back
 

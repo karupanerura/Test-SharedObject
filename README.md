@@ -77,7 +77,7 @@ Test::SharedObject provides atomic data operation between multiple process.
 - $shared->set($value)
 - my $value = $shared->get()
 
-    The syntactic sugar for `$shared-`txn()>.
+    The syntactic sugar for `$shared->txn()`.
 
 # LICENSE
 

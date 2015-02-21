@@ -6,7 +6,7 @@ use Test::SharedFork;
 use Test::SharedObject;
 
 my $shared = Test::SharedObject->new(0);
-is $shared->fetch, 0, 'should success to set 0.';
+is $shared->get, 0, 'should success to set 0.';
 
 for (1..50) {
     my $pid = fork;
@@ -21,4 +21,4 @@ for (1..50) {
 sleep 1;
 wait for 1..50;
 
-is $shared->fetch, 50, 'should get changed value in parent process.';
+is $shared->get, 50, 'should get changed value in parent process.';

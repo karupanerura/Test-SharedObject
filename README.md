@@ -13,7 +13,7 @@ Test::SharedObject - Data sharing in multi process.
     use Test::SharedObject;
 
     my $shared = Test::SharedObject->new(0);
-    is $shared->fetch, 0;
+    is $shared->get, 0;
 
     my $pid = fork;
     die $! unless defined $pid;
@@ -27,7 +27,7 @@ Test::SharedObject - Data sharing in multi process.
     }
     wait;
 
-    is $shared->fetch, 1;
+    is $shared->get, 1;
 
 # DESCRIPTION
 

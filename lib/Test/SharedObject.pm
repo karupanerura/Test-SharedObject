@@ -9,8 +9,6 @@ use Storable qw/store_fd fd_retrieve/;
 use File::Temp qw/tempfile/;
 use Test::SharedObject::Lock;
 
-my $identity = sub { $_[0] };
-
 sub new {
     my ($class, $data) = @_;
 
@@ -43,14 +41,15 @@ sub txn {
     return $data; ## unlock
 }
 
-sub store {
+sub set {
     my ($self, $data) = @_;
     return $self->txn(sub { $data });
 }
 
-sub fetch {
+sub _identity { $_[0] }
+sub get {
     my $self = shift;
-    return $self->txn($identity);
+    return $self->txn(\&_identity);
 }
 
 sub DESTROY {
@@ -77,7 +76,7 @@ Test::SharedObject - Data sharing in multi process.
     use Test::SharedObject;
 
     my $shared = Test::SharedObject->new(0);
-    is $shared->fetch, 0;
+    is $shared->get, 0;
 
     my $pid = fork;
     die $! unless defined $pid;
@@ -91,7 +90,7 @@ Test::SharedObject - Data sharing in multi process.
     }
     wait;
 
-    is $shared->fetch, 1;
+    is $shared->get, 1;
 
 =head1 DESCRIPTION
 

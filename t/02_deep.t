@@ -6,7 +6,7 @@ use Test::SharedFork;
 use Test::SharedObject;
 
 my $shared = Test::SharedObject->new({});
-is_deeply $shared->fetch, {}, 'should success to set empty hash-ref.';
+is_deeply $shared->get, {}, 'should success to set empty hash-ref.';
 $shared->txn(sub {
     my $hash = shift;
     $hash->{a} = 1;
@@ -14,7 +14,7 @@ $shared->txn(sub {
     $hash->{c} = 3;
     return $hash;
 });
-is_deeply $shared->fetch, {
+is_deeply $shared->get, {
     a => 1,
     b => 2,
     c => 3,
@@ -30,7 +30,7 @@ if ($pid == 0) {# child
         $hash->{c}++;
         return $hash;
     });
-    is_deeply $shared->fetch, {
+    is_deeply $shared->get, {
         a => 2,
         b => 3,
         c => 4,
@@ -39,7 +39,7 @@ if ($pid == 0) {# child
 }
 wait;
 
-is_deeply $shared->fetch, {
+is_deeply $shared->get, {
     a => 2,
     b => 3,
     c => 4,

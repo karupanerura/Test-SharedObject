@@ -1,5 +1,4 @@
 requires 'File::Temp';
-requires 'parent';
 requires 'perl', '5.008001';
 
 on configure => sub {
